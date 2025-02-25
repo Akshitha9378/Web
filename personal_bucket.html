@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bucket List</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .bucket-list {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bucket-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bucket-item.completed {
+            background-color: #e0f7fa;
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .bucket-item .item-text {
+            flex-grow: 1;
+        }
+
+        .bucket-item .checkbox {
+            margin-left: 20px;
+        }
+
+        .add-item-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #new-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 70%;
+            max-width: 400px;
+        }
+
+        #add-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Bucket List</h1>
+    <ul class="bucket-list" id="bucket-list">
+        </ul>
+
+    <div class="add-item-container">
+        <input type="text" id="new-item" placeholder="Add a new item...">
+        <button id="add-button">Add</button>
+    </div>
+
+    <script>
+        const bucketList = document.getElementById('bucket-list');
+        const newItemInput = document.getElementById('new-item');
+        const addButton = document.getElementById('add-button');
+
+        function addItem(text) {
+            const listItem = document.createElement('li');
+            listItem.classList.add('bucket-item');
+            listItem.innerHTML = `
+                <span class="item-text">${text}</span>
+                <input type="checkbox" class="checkbox">
+            `;
+
+            const checkbox = listItem.querySelector('.checkbox');
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    listItem.classList.add('completed');
+                } else {
+                    listItem.classList.remove('completed');
+                }
+            });
+
+            bucketList.appendChild(listItem);
+            newItemInput.value = ''; // Clear the input
+        }
+
+        addButton.addEventListener('click', function() {
+            const newItemText = newItemInput.value.trim();
+            if (newItemText) {
+                addItem(newItemText);
+            }
+        });
+
+        newItemInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addButton.click();
+            }
+        });
+
+       
+        addItem("Career goals");
+        addItem("Skills or hobbies you'd like to learn");
+        addItem("Travel Destination");
+        addItem("Foods you want to try");
+
+    </script>
+</body>
+</html>
