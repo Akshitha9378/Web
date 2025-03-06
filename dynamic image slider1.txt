@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Image Slider</title>
+    <style>
+        .slider-container {
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider img {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .nav-button.prev {
+            left: 10px;
+        }
+
+        .nav-button.next {
+            right: 10px;
+        }
+
+        .dots-container {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+        }
+
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.5);
+          margin: 0 5px;
+          cursor: pointer;
+        }
+
+        .dot.active {
+          background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            </div>
+        <button class="nav-button prev">&#10094;</button>
+        <button class="nav-button next">&#10095;</button>
+        <div class="dots-container">
+          </div>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const prevButton = document.querySelector('.nav-button.prev');
+        const nextButton = document.querySelector('.nav-button.next');
+        const dotsContainer = document.querySelector('.dots-container');
+
+        const images = [
+            'https://placekitten.com/600/400',
+            'https://placebear.com/600/400',
+            'https://loremflickr.com/600/400',
+            'https://placehold.co/600x400'
+        ]; 
+
+        let currentIndex = 0;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 600}px)`;
+            updateDots();
+        }
+
+        function createDots() {
+          images.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dotsContainer.appendChild(dot);
+            dot.addEventListener('click', () => {
+              currentIndex = index;
+              updateSlider();
+            });
+          });
+          updateDots();
+        }
+
+        function updateDots() {
+          const dots = document.querySelectorAll('.dot');
+          dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+
+        function populateSlider() {
+            images.forEach(imageUrl => {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                slider.appendChild(img);
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSlider();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSlider();
+        });
+
+        populateSlider();
+        createDots();
+        updateSlider(); 
+
+        // Optional: Auto-slide
+        setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          updateSlider();
+        }, 3000); 
+    </script>
+
+</body>
+</html>
