@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Example</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .product-container {
+            width: 80%;
+            max-width: 900px;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .product-image {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #e44d26;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .product-options {
+            margin-bottom: 20px;
+        }
+
+        .product-options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .product-options select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="https://m.media-amazon.com/images/I/51Ju5kCQmiL._AC_UL480_FMwebp_QL65_.jpg" alt="Product Image">
+        </div>
+        <div class="product-details">
+            <h2 class="product-title">Premium Product Name</h2>
+            <h3>kurthi</h3>
+            <p class="product-price">1000/-</p>
+            <p class="product-description">
+                This is a detailed description of the product. It includes information about its features, benefits, and specifications.
+            </p>
+            <div class="product-options">
+                <label for="size">Size:</label>
+                <select id="size">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+            <div class="product-options">
+                <label for="color">Color:</label>
+                <select id="color">
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+</body>
+</html>
